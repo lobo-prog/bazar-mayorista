@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electrónica - Bazar Mayorista</title>
+    <link rel="stylesheet" href="../style.css"> <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos específicos para las páginas de catálogo */
+        .catalog-header {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-family: var(--font-heading);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            position: relative; /* Para el botón de volver */
+        }
+
+        .catalog-header h1 {
+            font-size: 2.8rem;
+            margin: 0;
+            padding-bottom: 10px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(0,0,0,0.3);
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 30px 15px;
+            background-color: var(--background-light);
+        }
+
+        .catalog-item {
+            background-color: var(--card-background-light);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Empuja el botón hacia abajo */
+        }
+
+        .catalog-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .catalog-item img {
+            width: 100%;
+            height: 200px; /* Altura consistente para las imágenes */
+            object-fit: cover;
+            display: block; /* Elimina espacio extra debajo de la imagen */
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .item-details {
+            padding: 15px;
+            flex-grow: 1; /* Permite que los detalles ocupen el espacio disponible */
+        }
+
+        .item-details h3 {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .item-details p {
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-bottom: 8px;
+        }
+
+        .item-details .price {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+        }
+
+        .catalog-item .add-to-cart-btn {
+            background-color: var(--secondary-color);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 0 0 10px 10px; /* Redondeado solo en la parte inferior */
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            width: 100%; /* Botón de ancho completo abajo */
+            display: block; /* Hace que ocupe todo el ancho */
+        }
+
+        .catalog-item .add-to-cart-btn:hover {
+            background-color: #218838;
+        }
+
+        @media (max-width: 768px) {
+            .catalog-header h1 {
+                font-size: 2.2rem;
+            }
+            .back-button {
+                top: 10px;
+                left: 10px;
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+            .catalog-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+                padding: 20px 10px;
+            }
+            .catalog-item img {
+                height: 160px;
+            }
+            .item-details h3 {
+                font-size: 1.1rem;
+            }
+            .item-details .price {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="catalog-header">
+        <a href="../index.html" class="back-button">← Volver al Inicio</a>
+        <h1>Catálogo de Electrónica</h1>
+    </header>
+    <main class="catalog-grid">
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Smart+TV+4K" alt="Smart TV 4K">
+            <div class="item-details">
+                <h3>Smart TV 55" 4K HDR</h3>
+                <p>Impresionante calidad de imagen con Android TV.</p>
+                <p class="price">$499.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="499">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Laptop+Gaming" alt="Laptop Gaming">
+            <div class="item-details">
+                <h3>Laptop Gaming Core i7 RTX 3060</h3>
+                <p>Potencia extrema para los juegos más exigentes.</p>
+                <p class="price">$999.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="999">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Auriculares+ANC" alt="Auriculares ANC">
+            <div class="item-details">
+                <h3>Auriculares Inalámbricos ANC</h3>
+                <p>Cancelación de ruido activa y sonido premium.</p>
+                <p class="price">$89.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="89">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Smartwatch" alt="Smartwatch">
+            <div class="item-details">
+                <h3>Smartwatch Deportivo Pro</h3>
+                <p>Monitoreá tu actividad y notificaciones.</p>
+                <p class="price">$120.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="120">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Tablet" alt="Tablet">
+            <div class="item-details">
+                <h3>Tablet 10.1" Full HD</h3>
+                <p>Ideal para trabajo y entretenimiento.</p>
+                <p class="price">$199.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="199">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Camara+Seguridad" alt="Cámara de Seguridad">
+            <div class="item-details">
+                <h3>Cámara de Seguridad IP 360°</h3>
+                <p>Vigilá tu hogar desde cualquier lugar.</p>
+                <p class="price">$75.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="75">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Impresora+Multifuncion" alt="Impresora Multifunción">
+            <div class="item-details">
+                <h3>Impresora Multifunción WiFi</h3>
+                <p>Imprimí, copiá y escaneá con facilidad.</p>
+                <p class="price">$140.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="140">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Router+WiFi" alt="Router WiFi">
+            <div class="item-details">
+                <h3>Router WiFi 6 Doble Banda</h3>
+                <p>Conexión ultrarrápida para todo tu hogar.</p>
+                <p class="price">$65.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="65">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Consola+Portatil" alt="Consola Portátil">
+            <div class="item-details">
+                <h3>Consola de Juegos Portátil HD</h3>
+                <p>Diversión garantizada en cualquier lugar.</p>
+                <p class="price">$180.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="180">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Proyector+Portatil" alt="Proyector Portátil">
+            <div class="item-details">
+                <h3>Mini Proyector LED Portátil</h3>
+                <p>Cine en casa donde quieras.</p>
+                <p class="price">$110.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="110">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Drone+Mini" alt="Mini Drone">
+            <div class="item-details">
+                <h3>Mini Drone con Cámara HD</h3>
+                <p>Explorá el cielo con facilidad.</p>
+                <p class="price">$95.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="95">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Disco+SSD" alt="Disco SSD">
+            <div class="item-details">
+                <h3>Disco SSD Externo 1TB USB-C</h3>
+                <p>Almacenamiento ultrarrápido y portátil.</p>
+                <p class="price">$150.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="150">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Microfono+USB" alt="Micrófono USB">
+            <div class="item-details">
+                <h3>Micrófono Condensador USB</h3>
+                <p>Ideal para streaming y grabaciones.</p>
+                <p class="price">$55.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="55">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Webcam+HD" alt="Webcam HD">
+            <div class="item-details">
+                <h3>Webcam Full HD con Micrófono</h3>
+                <p>Videollamadas nítidas y claras.</p>
+                <p class="price">$45.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="45">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Adaptador+HDMI" alt="Adaptador HDMI">
+            <div class="item-details">
+                <h3>Adaptador HDMI a USB-C</h3>
+                <p>Conectá tus dispositivos fácilmente.</p>
+                <p class="price">$20.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="20">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Cargador+Rapido" alt="Cargador Rápido">
+            <div class="item-details">
+                <h3>Cargador Rápido USB-C 65W</h3>
+                <p>Cargá tus dispositivos en minutos.</p>
+                <p class="price">$35.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="35">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Soporte+Celular" alt="Soporte Celular">
+            <div class="item-details">
+                <h3>Soporte Celular para Auto</h3>
+                <p>Seguridad y comodidad al conducir.</p>
+                <p class="price">$18.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="18">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Foco+Inteligente" alt="Foco Inteligente">
+            <div class="item-details">
+                <h3>Foco Inteligente WiFi RGB</h3>
+                <p>Controlá la iluminación desde tu app.</p>
+                <p class="price">$22.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="22">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Enchufe+Inteligente" alt="Enchufe Inteligente">
+            <div class="item-details">
+                <h3>Enchufe Inteligente con USB</h3>
+                <p>Automatizá tus electrodomésticos.</p>
+                <p class="price">$28.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="28">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Teclado+Mecanico" alt="Teclado Mecánico">
+            <div class="item-details">
+                <h3>Teclado Mecánico RGB Gaming</h3>
+                <p>Experiencia de escritura y juego superior.</p>
+                <p class="price">$70.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="70">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Mouse+Gaming" alt="Mouse Gaming">
+            <div class="item-details">
+                <h3>Mouse Gaming Inalámbrico Alta Precisión</h3>
+                <p>Para la máxima ventaja en tus juegos.</p>
+                <p class="price">$40.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="40">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Estabilizador+Gimbal" alt="Estabilizador Gimbal">
+            <div class="item-details">
+                <h3>Estabilizador Gimbal para Smartphone</h3>
+                <p>Grabá videos profesionales con tu móvil.</p>
+                <p class="price">$100.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="100">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Powerstrip+USB" alt="Regleta USB">
+            <div class="item-details">
+                <h3>Regleta con Múltiples Tomas y USB</h3>
+                <p>Organizá tus conexiones eléctricas.</p>
+                <p class="price">$25.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="25">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Funda+Laptop" alt="Funda Laptop">
+            <div class="item-details">
+                <h3>Funda Protectora para Laptop 15.6"</h3>
+                <p>Protegé tu portátil con estilo.</p>
+                <p class="price">$30.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="30">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Soporte+Monitor" alt="Soporte Monitor">
+            <div class="item-details">
+                <h3>Soporte Ergonómico para Monitor</h3>
+                <p>Mejorá tu postura y espacio de trabajo.</p>
+                <p class="price">$48.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="48">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Cable+USB-C" alt="Cable USB-C">
+            <div class="item-details">
+                <h3>Cable USB-C a USB-C de Carga Rápida</h3>
+                <p>Transferencia de datos y carga eficiente.</p>
+                <p class="price">$12.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="12">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Hub+USB" alt="Hub USB">
+            <div class="item-details">
+                <h3>Hub USB 3.0 de 4 Puertos</h3>
+                <p>Expandí la conectividad de tu PC.</p>
+                <p class="price">$17.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="17">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Controlador+Inalambrico" alt="Controlador Inalámbrico">
+            <div class="item-details">
+                <h3>Controlador Inalámbrico para PC/Consola</h3>
+                <p>Dominá tus juegos con precisión.</p>
+                <p class="price">$50.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="50">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Gafas+VR" alt="Gafas VR">
+            <div class="item-details">
+                <h3>Gafas de Realidad Virtual para Smartphone</h3>
+                <p>Sumergite en un mundo virtual.</p>
+                <p class="price">$38.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="38">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Purificador+Aire" alt="Purificador de Aire">
+            <div class="item-details">
+                <h3>Purificador de Aire Inteligente HEPA</h3>
+                <p>Aire limpio y fresco en tu hogar.</p>
+                <p class="price">$160.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="160">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Smart+Lock" alt="Cerradura Inteligente">
+            <div class="item-details">
+                <h3>Cerradura Inteligente WiFi</h3>
+                <p>Acceso seguro y sin llaves.</p>
+                <p class="price">$130.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="130">Agregar al Carrito</button>
+        </div>
+
+        <div class="catalog-item">
+            <img src="https://via.placeholder.com/300x200/007bff/FFFFFF?text=Estacion+Carga" alt="Estación de Carga">
+            <div class="item-details">
+                <h3>Estación de Carga Inalámbrica 3-en-1</h3>
+                <p>Cargá móvil, reloj y auriculares.</p>
+                <p class="price">$60.00</p>
+            </div>
+            <button class="add-to-cart-btn" data-price="60">Agregar al Carrito</button>
+        </div>
+
+    </main>
+    <footer>
+        <p>&copy; 2025 Bazar Mayorista. Todos los derechos reservados.</p>
+    </footer>
+    <script src="../script.js"></script> </body>
+</html>
